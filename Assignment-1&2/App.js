@@ -1,0 +1,79 @@
+// app.js for GetStarted, Login, SignUp, Welcome Pages
+
+import React, { useState } from 'react';
+import { View, Alert } from 'react-native';
+import styles from './styles';
+import GettingStarted from './GettingStarted';
+import SignUp from './SignUp';
+import Login from './Login';
+import Welcome from './Welcome';
+
+const App = () => {
+  const [page, setPage] = useState('gettingStarted');
+  const [userDetails, setUserDetails] = useState({});
+  const [form, setForm] = useState({ username: '', password: '', conpassword: '', email: '' });
+  const [loginForm, setLoginForm] = useState({ username: '', password: '' });
+
+  const handleSignUpChange = (name, value) => {
+    setForm({ ...form, [name]: value });
+  };
+
+  const handleLoginChange = (name, value) => {
+    setLoginForm({ ...loginForm, [name]: value });
+  };
+
+  const signUp = () => {
+    if (!form.username) {
+      Alert.alert('Error', 'Username is required');
+      return;
+    }
+    if (!form.password || !form.conpassword) {
+      Alert.alert('Error', 'Password and confirm password are required');
+      return;
+    }
+    if (form.password !== form.conpassword) {
+      Alert.alert('Error', 'Passwords do not match');
+      return;
+    }
+    setUserDetails(form);
+    setForm({ username: '', password: '', conpassword: '', email: '' });
+    setPage('login');
+  };
+
+  const login = () => {
+    if (!loginForm.username) {
+      Alert.alert('Error', 'Username is required');
+      return;
+    }
+    if (!loginForm.password) {
+      Alert.alert('Error', 'Password is required');
+      return;
+    }
+    if (loginForm.username === userDetails.username && loginForm.password === userDetails.password) {
+      setPage('welcome');
+      Alert.alert('Logged in successfully!');
+    } else {
+      Alert.alert('Invalid username or password');
+    }
+  };
+
+  const logout = () => {
+    setPage('gettingStarted');
+    setLoginForm({ username: '', password: '' });
+  };
+
+  return (
+    <View style={styles.container}>
+      {page === 'gettingStarted' && <GettingStarted setPage={setPage} />}
+      {page === 'signUp' && (
+        <SignUp form={form} handleSignUpChange={handleSignUpChange} signUp={signUp} />
+      )}
+      {page === 'login' && (
+        <Login loginForm={loginForm} handleLoginChange={handleLoginChange} login={login} />
+      )}
+      {page === 'welcome' && <Welcome logout={logout} />}
+    </View>
+  );
+};
+
+export default App;
