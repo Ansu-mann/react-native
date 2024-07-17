@@ -2,13 +2,13 @@ import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, ImageBackground } from 'react-native';
 import styles from './styles';
 
-const SignUp = ({ form, handleSignUpChange, signUp }) => {
+const SignUp = ({ form, handleSignUpChange, signUp, setPage }) => {
   return (
     <ImageBackground source={require('../assets/background.jpg')} style={styles.backgroundImage}>
       <View style={styles.page}>
       <View style={styles.extbutcon}>
-          <TouchableOpacity style={[{ backgroundColor: 'green' }, styles.extbut]} onPress={() => setPage('signUp')}>
-            <Text style={styles.buttonText}>Sign Up</Text>
+          <TouchableOpacity style={[{ backgroundColor: 'green' }, styles.extbut]} onPress={() => setPage('login')}>
+            <Text style={styles.buttonText}>Log In</Text>
           </TouchableOpacity>
           <TouchableOpacity style={[{ backgroundColor: 'gray' }, styles.extbut]} onPress={() => setPage('gettingStarted')}>
             <Text style={styles.buttonText}>Home</Text>
