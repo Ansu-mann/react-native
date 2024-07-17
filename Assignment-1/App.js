@@ -1,12 +1,10 @@
-// app.js for GetStarted, Login, SignUp, Welcome Pages
-
 import React, { useState } from 'react';
 import { View, Alert } from 'react-native';
-import styles from './styles';
-import GettingStarted from './GettingStarted';
-import SignUp from './SignUp';
-import Login from './Login';
-import Welcome from './Welcome';
+import styles from './components/styles';
+import GettingStarted from './components/GettingStarted';
+import SignUp from './components/SignUp';
+import Login from './components/Login';
+import Welcome from './components/Welcome';
 
 const App = () => {
   const [page, setPage] = useState('gettingStarted');
