@@ -35,7 +35,7 @@ const App = () => {
     }
     setUserDetails(form);
     setForm({ username: '', password: '', conpassword: '', email: '' });
-    setPage('login');
+    setPage('gettingStarted'); // Navigate back to gettingStarted page after signup
   };
 
   const login = () => {
@@ -48,7 +48,7 @@ const App = () => {
       return;
     }
     if (loginForm.username === userDetails.username && loginForm.password === userDetails.password) {
-      setPage('welcome');
+      setPage('welcome'); // Navigate to welcome page upon successful login
       Alert.alert('Logged in successfully!');
     } else {
       Alert.alert('Invalid username or password');
@@ -64,10 +64,10 @@ const App = () => {
     <View style={styles.container}>
       {page === 'gettingStarted' && <GettingStarted setPage={setPage} />}
       {page === 'signUp' && (
-        <SignUp form={form} handleSignUpChange={handleSignUpChange} signUp={signUp} />
+        <SignUp form={form} handleSignUpChange={handleSignUpChange} signUp={signUp} setPage={setPage} />
       )}
       {page === 'login' && (
-        <Login loginForm={loginForm} handleLoginChange={handleLoginChange} login={login} />
+        <Login loginForm={loginForm} handleLoginChange={handleLoginChange} login={login} setPage={setPage} />
       )}
       {page === 'welcome' && <Welcome logout={logout} />}
     </View>
@@ -75,3 +75,4 @@ const App = () => {
 };
 
 export default App;
+
